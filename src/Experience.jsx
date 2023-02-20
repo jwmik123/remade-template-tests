@@ -1,11 +1,10 @@
 import * as THREE from "three";
 import { extend, useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
-import { Text, Float, OrbitControls, shaderMaterial } from "@react-three/drei";
+import { Text, OrbitControls, shaderMaterial } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 
 import { EffectComposer, Noise } from "@react-three/postprocessing";
-import Shader from "./Shader";
 
 import vertexShader from "./shaders/vertex.glsl";
 import vertexShader1 from "./shaders/vertex1.glsl";
@@ -45,7 +44,7 @@ export default function Experience() {
         <Noise blendFunction={BlendFunction.SOFT_LIGHT} />
       </EffectComposer>
       <Perf position="top-left" />
-      <OrbitControls makeDefault />
+      {/* <OrbitControls makeDefault /> */}
       <directionalLight castShadow position={[1, 2, 3]} intensity={1} />
       <ambientLight intensity={0.5} />
       <cubeCamera
@@ -53,9 +52,7 @@ export default function Experience() {
         position={[0, 0, 0]}
         args={[0.1, 10, renderTarget]}
       >
-        <mesh
-        // position-x={0.4} position-y={0.2} position-z={0.4}
-        >
+        <mesh>
           <sphereGeometry args={[0.4, 32, 32]} />
           <shaderMaterial
             vertexShader={vertexShader1}
