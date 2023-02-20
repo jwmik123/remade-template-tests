@@ -46,7 +46,7 @@ export default function Experience() {
   useFrame(({ camera, gl, scene, mouse }, delta) => {
     noiseMaterialBackground.current.uTime += delta * 0.3;
     cubeCamera.current.update(gl, scene);
-    camera.position.lerp(v.set(mouse.x * 0.5, mouse.y * 0.5, 1), 0.0015);
+    camera.position.lerp(v.set(mouse.x / 2, mouse.y / 2, 1), 0.0015);
   });
 
   return (
