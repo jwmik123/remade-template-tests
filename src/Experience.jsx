@@ -32,9 +32,21 @@ export default function Experience() {
   const noiseMaterialBackground = useRef();
   const cubeCamera = useRef();
 
-  useFrame(({ gl, scene }, delta) => {
+  // function Rig({ v = new THREE.Vector3() }) {
+  //   return useFrame((state) => {
+  //     state.camera.position.lerp(
+  //       v.set(state.mouse.x / 2, state.mouse.y / 2, 1),
+  //       0.05
+  //     );
+  //   });
+  // }
+
+  let v = new THREE.Vector3();
+
+  useFrame(({ camera, gl, scene, mouse }, delta) => {
     noiseMaterialBackground.current.uTime += delta * 0.3;
     cubeCamera.current.update(gl, scene);
+    camera.position.lerp(v.set(mouse.x * 0.5, mouse.y * 0.5, 1), 0.0015);
   });
 
   return (
