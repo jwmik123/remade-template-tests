@@ -28,35 +28,25 @@ export default function Experience() {
       encoding: THREE.sRGBEncoding,
     })
   );
-
   const noiseMaterialBackground = useRef();
   const cubeCamera = useRef();
-
-  // function Rig({ v = new THREE.Vector3() }) {
-  //   return useFrame((state) => {
-  //     state.camera.position.lerp(
-  //       v.set(state.mouse.x / 2, state.mouse.y / 2, 1),
-  //       0.05
-  //     );
-  //   });
-  // }
+  const sphere = useRef();
 
   let v = new THREE.Vector3();
 
-  useFrame(({ camera, gl, scene, mouse }, delta) => {
+  useFrame(({ clock, camera, gl, scene, mouse }, delta) => {
     noiseMaterialBackground.current.uTime += delta * 0.3;
     cubeCamera.current.update(gl, scene);
-    camera.position.lerp(v.set(mouse.x / 2, mouse.y / 2, 1), 0.0015);
+    // Not good enough, shouldn't zoom in on the Z axis
+    // camera.position.lerp(v.set(mouse.x / 2, mouse.y / 2, 1), 0.0015);
   });
 
   return (
     <>
       <EffectComposer>
-        {/* <Shader /> */}
         <Noise blendFunction={BlendFunction.SOFT_LIGHT} />
       </EffectComposer>
-      <Perf position="top-left" />
-      {/* <OrbitControls makeDefault /> */}
+      <Perf position="bottom-right" />
       <directionalLight castShadow position={[1, 2, 3]} intensity={1} />
       <ambientLight intensity={0.5} />
       <cubeCamera
@@ -65,7 +55,7 @@ export default function Experience() {
         args={[0.1, 10, renderTarget]}
       >
         <mesh>
-          <sphereGeometry args={[0.4, 32, 32]} />
+          <sphereGeometry ref={sphere} args={[0.4, 32, 32]} />
           <shaderMaterial
             vertexShader={vertexShader1}
             fragmentShader={fragmentShader1}
