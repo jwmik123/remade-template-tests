@@ -1,7 +1,15 @@
 import * as THREE from "three";
-import { extend, useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import { Text, OrbitControls, shaderMaterial } from "@react-three/drei";
+import { Vector3 } from "three";
+import { extend, useFrame, useThree } from "@react-three/fiber";
+import { useRef, useState, useMemo } from "react";
+import {
+  Text,
+  shaderMaterial,
+  OrbitControls,
+  SpotLight,
+  useDepthBuffer,
+  Text3D,
+} from "@react-three/drei";
 import { Perf } from "r3f-perf";
 
 import { EffectComposer, Noise } from "@react-three/postprocessing";
@@ -30,59 +38,74 @@ export default function Experience() {
   );
   const noiseMaterialBackground = useRef();
   const cubeCamera = useRef();
-  const sphere = useRef();
 
-  let v = new THREE.Vector3();
+  const config = useMemo(
+    () => ({
+      size: 40,
+      height: 30,
+      curveSegments: 32,
+      bevelEnabled: true,
+      bevelThickness: 6,
+      bevelSize: 2.5,
+      bevelOffset: 0,
+      bevelSegments: 8,
+    }),
+    []
+  );
 
-  useFrame(({ clock, camera, gl, scene, mouse }, delta) => {
-    noiseMaterialBackground.current.uTime += delta * 0.3;
+  useFrame(({ camera, gl, scene, mouse }, delta) => {
+    noiseMaterialBackground.current.uTime += delta * 0.1;
     cubeCamera.current.update(gl, scene);
-    // Not good enough, shouldn't zoom in on the Z axis
-    // camera.position.lerp(v.set(mouse.x / 2, mouse.y / 2, 1), 0.0015);
+
+    const parallaxX = mouse.x;
+    const parallaxY = mouse.y;
+    cubeCamera.current.position.x =
+      (parallaxX - cubeCamera.current.position.x / 2) * 0.01;
+    cubeCamera.current.position.y =
+      (-parallaxY - cubeCamera.current.position.y / 2) * 0.01;
   });
 
   return (
     <>
-      <EffectComposer>
+      {/* <EffectComposer>
         <Noise blendFunction={BlendFunction.SOFT_LIGHT} />
-      </EffectComposer>
+      </EffectComposer> */}
       <Perf position="bottom-right" />
-      <directionalLight castShadow position={[1, 2, 3]} intensity={1} />
       <ambientLight intensity={0.5} />
+
       <cubeCamera
         ref={cubeCamera}
         position={[0, 0, 0]}
         args={[0.1, 10, renderTarget]}
       >
-        <mesh>
-          <sphereGeometry ref={sphere} args={[0.4, 32, 32]} />
+        <mesh position={[0, 0, -0.5]}>
+          <icosahedronGeometry args={[0.4, 1]} />
           <shaderMaterial
             vertexShader={vertexShader1}
             fragmentShader={fragmentShader1}
             uniforms={{
               tCube: { value: renderTarget.texture },
-              resolution: { value: new THREE.Vector4() },
               side: { value: THREE.DoubleSide },
             }}
           />
         </mesh>
       </cubeCamera>
-
       <mesh position-x={0}>
-        <sphereGeometry args={[2, 32, 32]} />
+        <sphereGeometry args={[2, 16, 16]} />
         <noiseMaterialBackground ref={noiseMaterialBackground} />
       </mesh>
-      {/* <Text position-z={1} fontSize={0.02} font={"./Unbounded-Bold.ttf"}>
-        ReMaDe
-      </Text> */}
-      <Text
-        position-z={-0.5}
-        color={"gray"}
-        fontSize={0.05}
-        font={"./Unbounded-Bold.ttf"}
-      >
-        REMADE
-      </Text>
+
+      <mesh>
+        {/* <Text3D
+          font={"./Unbounded-Bold.ttf"}
+          position={[0, 0, -0.3]}
+          fontSize={0.1}
+          // color={"gray"}
+          // {...config}
+        >
+          R
+        </Text3D> */}
+      </mesh>
     </>
   );
 }

@@ -1,7 +1,7 @@
 export const About = () => {
   return (
     <section>
-      <p>
+      <p className="text-white">
         When you first started your company, you wanted to save money wherever
         you could. So, you decided to take on the task of building your own
         website and branding You poured hours of your time into it, and even
