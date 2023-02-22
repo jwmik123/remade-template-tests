@@ -6,6 +6,7 @@ import { Html, useProgress, Environment } from "@react-three/drei";
 
 import Experience from "./Experience.jsx";
 import About from "./components/About";
+import Hero from "./components/Hero";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
@@ -16,14 +17,9 @@ function Loader() {
 
 root.render(
   <>
-    <div className="z-10 h-full w-full bg-transparent absolute flex items-center justify-center pointer-events-none">
-      <h1 className="text-white font-trans text-7xl font-medium text-center">
-        Completely reshape your <br /> business by Remaking
-      </h1>
-    </div>
+    <Hero />
     <Canvas
       dpr={[1, 2]}
-      // className={"-z-10"}
       camera={{
         fov: 45,
         near: 0.1,
@@ -35,6 +31,6 @@ root.render(
         <Experience />
       </Suspense>
     </Canvas>
-    <About className="about-us" />
+    <About />
   </>
 );

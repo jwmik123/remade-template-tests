@@ -1,6 +1,5 @@
 import * as THREE from "three";
-import { Vector3 } from "three";
-import { extend, useFrame, useThree } from "@react-three/fiber";
+import { extend, useFrame } from "@react-three/fiber";
 import { useRef, useState, useMemo } from "react";
 import {
   Text,
@@ -13,12 +12,12 @@ import {
 import { Perf } from "r3f-perf";
 
 import { EffectComposer, Noise } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 import vertexShader from "./shaders/vertex.glsl";
 import vertexShader1 from "./shaders/vertex1.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
 import fragmentShader1 from "./shaders/fragment1.glsl";
-import { BlendFunction } from "postprocessing";
 
 const NoiseMaterialBackground = shaderMaterial(
   { uTime: 0, resolution: new THREE.Vector4(), side: THREE.DoubleSide },
@@ -53,7 +52,7 @@ export default function Experience() {
     []
   );
 
-  useFrame(({ camera, gl, scene, mouse }, delta) => {
+  useFrame(({ gl, scene, mouse }, delta) => {
     noiseMaterialBackground.current.uTime += delta * 0.1;
     cubeCamera.current.update(gl, scene);
 
@@ -70,9 +69,18 @@ export default function Experience() {
       {/* <EffectComposer>
         <Noise blendFunction={BlendFunction.SOFT_LIGHT} />
       </EffectComposer> */}
-      <Perf position="bottom-right" />
+      {/* <Perf position="bottom-right" /> */}
       <ambientLight intensity={0.5} />
 
+      <mesh>
+        <Text3D
+          font={"./Unbounded_Bold.json"}
+          position={[-0.25, -0.2, -2]}
+          scale={0.4}
+        >
+          R{/* <meshNormalMaterial /> */}
+        </Text3D>
+      </mesh>
       <cubeCamera
         ref={cubeCamera}
         position={[0, 0, 0]}
