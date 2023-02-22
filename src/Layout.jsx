@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useLayoutEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Html, useProgress } from "@react-three/drei";
 
@@ -8,6 +8,7 @@ import Experience from "./Experience.jsx";
 import About from "./components/About";
 import Hero from "./components/Hero";
 import Cases from "./components/Cases";
+import Nav from "./components/Nav.jsx";
 
 const Layout = () => {
   function Loader() {
@@ -15,7 +16,7 @@ const Layout = () => {
     return <Html center>{progress} % loaded</Html>;
   }
 
-  // useLayoutEffect(() => {
+  // useEffect(() => {
   //   const lenis = new Lenis({
   //     duration: 1,
   //     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -36,6 +37,7 @@ const Layout = () => {
 
   return (
     <>
+      <Nav />
       <Hero />
       <Canvas
         dpr={[1, 2]}

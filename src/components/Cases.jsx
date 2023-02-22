@@ -9,8 +9,8 @@ export const Cases = () => {
     <section className="py-14">
       <div className="container mx-auto text-white font-extended flex flex-col">
         <div className="flex justify-between mb-10">
-          <h1 className="self-end text-[90px] font-medium">Cases</h1>
-          <span className="self-end underline">View all cases</span>
+          <h1 className="self-end text-[100px] font-bold">Cases</h1>
+          <span className="self-center underline">View all cases</span>
         </div>
         <Swiper
           pagination={{
