@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       trans: ["transducer", "sans-serif"],
+      extended: ["transducer extended", "sans-serif"],
     },
     extend: {},
   },

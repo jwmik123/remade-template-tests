@@ -87,7 +87,8 @@ export default function Experience() {
         args={[0.1, 10, renderTarget]}
       >
         <mesh position={[0, 0, -0.5]}>
-          <icosahedronGeometry args={[0.4, 1]} />
+          {/* <icosahedronGeometry args={[0.4, 3]} /> */}
+          <sphereGeometry args={[0.4, 32, 32]} />
           <shaderMaterial
             vertexShader={vertexShader1}
             fragmentShader={fragmentShader1}

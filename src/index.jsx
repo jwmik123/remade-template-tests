@@ -7,6 +7,7 @@ import { Html, useProgress, Environment } from "@react-three/drei";
 import Experience from "./Experience.jsx";
 import About from "./components/About";
 import Hero from "./components/Hero";
+import Cases from "./components/Cases";
 
 const root = ReactDOM.createRoot(document.querySelector("#root"));
 
@@ -31,6 +32,6 @@ root.render(
         <Experience />
       </Suspense>
     </Canvas>
-    <About />
+    <Cases />
   </>
 );
