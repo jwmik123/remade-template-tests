@@ -13,3 +13,8 @@ body,
   height: 100%;
   background: #000;
 }
+
+.swiper-pagination-bullet {
+  margin-right: 20px;
+  background: none !important;
+}
