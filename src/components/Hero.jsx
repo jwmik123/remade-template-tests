@@ -6,9 +6,9 @@ export const Hero = () => {
           Completely reshape your <br /> business by Remaking
         </h1>
         <p className="text-center font-trans text-white mt-10 text-md lg:text-xl">
-          Marketing and Design studio that combines interactive web experience
-          with modern marketing for growing innovative businesses who want to
-          tell thier brands story
+          Marketing and Design studio that combines interactive web <br />{" "}
+          experience with modern marketing for growing innovative businesses who
+          want to tell thier brands story
         </p>
       </div>
     </div>
