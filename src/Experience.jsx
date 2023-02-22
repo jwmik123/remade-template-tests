@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { extend, useFrame } from "@react-three/fiber";
+import { extend, useFrame, useLoader } from "@react-three/fiber";
 import { useRef, useState, useMemo } from "react";
 import {
   Text,
@@ -18,6 +18,7 @@ import vertexShader from "./shaders/vertex.glsl";
 import vertexShader1 from "./shaders/vertex1.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
 import fragmentShader1 from "./shaders/fragment1.glsl";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const NoiseMaterialBackground = shaderMaterial(
   { uTime: 0, resolution: new THREE.Vector4(), side: THREE.DoubleSide },
@@ -25,6 +26,15 @@ const NoiseMaterialBackground = shaderMaterial(
   fragmentShader
 );
 extend({ NoiseMaterialBackground });
+
+const Isodron = () => {
+  const gltf = useLoader(GLTFLoader, "./IconSphere.gltf");
+  return (
+    <>
+      <primitive object={gltf.scene} scale={0.4} />
+    </>
+  );
+};
 
 export default function Experience() {
   const [renderTarget] = useState(
@@ -89,6 +99,7 @@ export default function Experience() {
         <mesh position={[0, 0, -0.5]}>
           {/* <icosahedronGeometry args={[0.4, 3]} /> */}
           <sphereGeometry args={[0.4, 32, 32]} />
+          {/* <Isodron /> */}
           <shaderMaterial
             vertexShader={vertexShader1}
             fragmentShader={fragmentShader1}
