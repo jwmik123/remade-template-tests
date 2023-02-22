@@ -38,9 +38,9 @@ const Isodron = (props) => {
   const texture = useLoader(RGBELoader, "./aerodynamics_workshop_1k.hdr");
   const config = {
     bounces: 3,
-    aberrationStrength: 0.1,
+    aberrationStrength: 0.03,
     ior: 2.5,
-    fresnel: 0.8,
+    fresnel: 0.1,
     color: "white",
     fastChroma: true,
   };
@@ -79,10 +79,10 @@ export default function Experience() {
 
   return (
     <>
-      <EffectComposer>
+      {/* <EffectComposer>
         <Noise opacity={0.1} />
-      </EffectComposer>
-      <ambientLight intensity={0.3} />
+      </EffectComposer> */}
+      <ambientLight intensity={0.5} />
       <Perf />
       <Isodron position={[0, 0, 0]} />
       <mesh position-x={0}>
