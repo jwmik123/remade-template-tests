@@ -59,15 +59,15 @@ void main() {
     // vec3 color3 = vec3(230./255.,221./255.,196./255.);
 
     // PURPLE
-    // vec3 color1 = vec3(248./255.,6./255.,204./255.);
-    // vec3 color2 = vec3(46./255.,2./255.,73./255.);
+    vec3 color1 = vec3(248./255.,6./255.,204./255.);
+    vec3 color2 = vec3(46./255.,2./255.,73./255.);
     // vec3 color2 = vec3(169./255.,16./255.,121./255.);    
-    // vec3 accent = vec3(49./255.,225./255.,247./255.); // Blue varient
+    vec3 accent = vec3(49./255.,225./255.,247./255.); // Blue varient
 
     // Random
-    vec3 accent = vec3(77./255.,69./255.,93./255.);
-    vec3 color2 = vec3(245./255.,233./255.,207./255.);
-    vec3 color1 = vec3(125./255.,185./255.,182./255.);
+    // vec3 accent = vec3(77./255.,69./255.,93./255.);
+    // vec3 color2 = vec3(245./255.,233./255.,207./255.);
+    // vec3 color1 = vec3(125./255.,185./255.,182./255.);
 
     // Pattern creation
     vec2 baseUV = rotate2D(n)*vPosition.xy*0.2;
