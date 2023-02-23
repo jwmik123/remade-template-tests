@@ -6,6 +6,7 @@ import {
   OrbitControls,
   useGLTF,
   MeshRefractionMaterial,
+  MeshWobbleMaterial,
   CubeCamera,
 } from "@react-three/drei";
 import { RGBELoader } from "three-stdlib";
@@ -35,7 +36,7 @@ const Isodron = (props) => {
   useFrame(({ clock }, delta) => {
     const a = clock.getElapsedTime();
     ref.current.position.y = Math.cos(a) * 0.05;
-    ref.current.rotation.y += delta * 0.1;
+    ref.current.rotation.y += delta * 0.2;
   });
 
   return (
@@ -52,7 +53,7 @@ const Isodron = (props) => {
             {...config}
             toneMapped={false}
           />
-          <OrbitControls enableZoom={false} />
+          <OrbitControls enableZoom={false} touches={false} />
         </mesh>
       )}
     </CubeCamera>
